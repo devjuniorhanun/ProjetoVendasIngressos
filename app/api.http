@@ -1,0 +1,78 @@
+### 👉👉👉 API REST 👈👈👈
+
+### 👉👉👉 Rota de Incial 👈👈👈
+GET http://localhost:3000/
+
+
+### 👉👉👉 Rota de Cadastro de Usuários 👈👈👈
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+    "name": "nome",
+    "email": "email@gmail.com",
+    "password": "123456"
+    
+}
+
+### 👉👉👉 Rota de Autenticação 👈👈👈
+# @name loginPartner1
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+    "email": "email@gmail.com",
+    "password": "123456"
+    
+}
+
+###
+@tokenPartner1 = {{ loginPartner1.response.body.token }}
+
+### Criação do Parceiro
+POST http://localhost:3000/partners/register
+Content-Type: application/json
+Authorization: Bearer {{ tokenPartner1 }}
+
+{
+    "name": "Partner 1",
+    "email": "partner1@user.com",
+    "password": "secret",
+    "company_name": "Company Name 1"
+}
+
+### Criação do Consumidor
+POST http://localhost:3000/customers/register
+Content-Type: application/json
+
+{
+    "name": "Partner 1",
+    "email": "partner1@user.com",
+    "password": "secret",
+    "address": "Rua 1",
+    "phone": "1234567890"
+}
+
+### Criação do Evento pelo Parceiro
+POST http://localhost:3000/partners/events
+Content-Type: application/json
+
+{
+    "name": "Evento test 1",
+    "description": "descrição do evento",
+    "date": "2025-01-01T00:00:00",
+    "location": "Rua x, bairro etc"
+}
+
+### Listagem de Eventos pelo Parceiro
+GET http://localhost:3000/partners/events
+
+### Listagem de Eventos pelo Parceiro por ID
+GET http://localhost:3000/partners/events/1
+
+
+### Listagem de Eventos
+GET http://localhost:3000/events
+
+### Listagem de Eventos por ID
+GET http://localhost:3000/events/1
